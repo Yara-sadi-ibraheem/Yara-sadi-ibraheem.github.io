@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Research",
+    "summary": "Current questions, methods, and collaborations.",
+    "items": [
+      "Human-centered information systems",
+      "Digital knowledge and trust",
+      "Accessible research infrastructure"
+    ]
+  },
+  {
+    "title": "Publications",
+    "summary": "Selected articles, essays, and working papers.",
+    "items": [
+      "Designing for Legibility — Journal of Digital Studies, 2026",
+      "Public Knowledge Infrastructures — New Media Review, 2025",
+      "Interfaces of Trust — working paper"
+    ]
+  },
+  {
+    "title": "Teaching",
+    "summary": "Courses, supervision, and learning resources.",
+    "items": [
+      "Methods for Digital Research",
+      "Information, Evidence, and Society",
+      "Graduate thesis supervision"
+    ]
+  },
+  {
+    "title": "Service",
+    "summary": "Academic citizenship and public engagement.",
+    "items": [
+      "Peer reviewer for interdisciplinary journals",
+      "Open-source research tools contributor",
+      "Community workshops on digital literacy"
+    ]
+  }
+]
