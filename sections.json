@@ -1,38 +1,42 @@
 [
   {
-    "title": "Research",
+    "title": "Playgrounds",
     "summary": "Current questions, methods, and collaborations.",
+    "img": "playgrounds.jpeg",
     "items": [
-      "Human-centered information systems",
-      "Digital knowledge and trust",
-      "Accessible research infrastructure"
+      {"paper":"Playgrounds as colonial infrastructure: biopolitics and spatial control in Jaffa. Y Sa'di-Ibraheem - Children's Geographies, 2026",
+      "link":"https://www.tandfonline.com/doi/abs/10.1080/14733285.2026.2694346"},
+      {"paper":"Indigenous students’ geographies on the academic fortress campus: Palestinian students’ spatial experiences at the Hebrew University of Jerusalem. Y Sa'di-Ibraheem - Journal of Holy Land and Palestine Studies, 2021",
+      "link":"https://www.euppublishing.com/doi/abs/10.3366/hlps.2021.0269"}    
     ]
   },
   {
-    "title": "Publications",
+    "title": "Urbanism",
     "summary": "Selected articles, essays, and working papers.",
+    "img": "jafa.jpeg",
     "items": [
-      "Designing for Legibility — Journal of Digital Studies, 2026",
-      "Public Knowledge Infrastructures — New Media Review, 2025",
-      "Interfaces of Trust — working paper"
+      {"paper":"Settler colonial temporalities, ruinations and neoliberal urban renewal: the case of Suknet Al-Huresh in Jaffa. Y Sa'di-Ibraheem - GeoJournal, 2022",
+      "link":"https://link.springer.com/article/10.1007/s10708-020-10279-0"}
     ]
   },
   {
-    "title": "Teaching",
+    "title": "Infrastructure",
+    "img": "lines.jpeg",
     "summary": "Courses, supervision, and learning resources.",
     "items": [
-      "Methods for Digital Research",
-      "Information, Evidence, and Society",
-      "Graduate thesis supervision"
+      {"paper":"Cabling and un-cabling Palestine/Israel: Toward a theory of cumulative infrastructural injustice. Y Sa'di-Ibraheem, S Wilkof - Political Geography, 2025",
+      "link":"https://www.sciencedirect.com/science/article/pii/S0962629824001914"},
+      {"paper":"Playgrounds as colonial infrastructure: biopolitics and spatial control in Jaffa. Y Sa'di-Ibraheem - Children's Geographies, 2026",
+      "link":"https://www.tandfonline.com/doi/abs/10.1080/14733285.2026.2694346"}
     ]
   },
   {
-    "title": "Service",
+    "title": "Acadmic Inequality",
+    "img": "leviathan.jpeg",
     "summary": "Academic citizenship and public engagement.",
     "items": [
-      "Peer reviewer for interdisciplinary journals",
-      "Open-source research tools contributor",
-      "Community workshops on digital literacy"
+      {"paper":"Producing Rooted Knowledge: Predicaments of Palestinians Positioned in Israeli Universities. Y Sa'di-Ibraheem - Comparative Studies of South Asia, Africa and the Middle East, 2024",
+      "link":"https://read.dukeupress.edu/cssaame/article-abstract/44/3/402/392632/Producing-Rooted-KnowledgePredicaments-of"}
     ]
   }
 ]

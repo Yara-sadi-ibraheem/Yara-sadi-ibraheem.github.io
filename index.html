@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A minimal academic profile webpage.">
-  <title>Dr. Alex Morgan — Academic Profile</title>
+  <title>Yara Sa'di-Ibraheem</title>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -13,24 +13,49 @@
     crossorigin="anonymous"
   >
 
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+  >
+
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:,">
 </head>
 
 <body>
-  <main class="profile-shell" v-scope="Profile()" v-cloak>
+  <main id="profile-app" class="profile-shell" v-scope @vue:mounted="mounted" v-cloak>
     <header>
-      <!--
-      <div class="portrait" aria-label="Profile portrait placeholder">
-        <svg viewBox="0 0 132 132" role="img" aria-hidden="true">
-          <rect class="portrait-background" width="132" height="132"/>
-          <circle class="portrait-figure" cx="66" cy="50" r="24"/>
-          <path class="portrait-figure" d="M24 126c3-29 20-45 42-45s39 16 42 45"/>
-        </svg>
-        <img src="./Yara_profile.jpg" class="img-fluid rounded-circle mb-3" alt="Profile picture" style="max-width:100%; max-height:100%;">
+      <div class="d-flex justify-content-center">
+        <img src="./Yara_profile.jpg" class="img-fluid rounded-circle mb-3 align-center" alt="Profile picture" style="max-width:40%; aspect-ratio: 1 / 1; object-fit: cover;">
       </div>
-      -->
-      <div align-items-center>
-        <img src="./Yara_profile.jpg" class="img-fluid rounded-circle mb-3 align-center" alt="Profile picture" style="max-width:40%; max-height:40%;">
+      <div class="profile-links d-flex justify-content-center">
+        <a
+          href="https://scholar.google.com/citations?user=kj83i3oAAAAJ&hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="text-decoration: none;"
+        ><i class="ai ai-google-scholar profile-icon" aria-hidden="true"></i>
+        </a>
+        <span>/</span>
+        <a
+          href="https://independent.academia.edu/YaraSadi"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="text-decoration: none;"
+        ><i class="ai ai-academia profile-icon" aria-hidden="true"></i>
+        </a>
+        <span>/</span>
+        <a
+          href="mailto:name@university.edu"
+          aria-label="Email"
+        >
+          <i class="bi bi-envelope" aria-hidden="true"></i>
+        </a>
       </div>
       <div class="intro">
         <h1>Yara Sa'di-Ibraheem, PhD</h1>
@@ -41,7 +66,12 @@
       </div>
     </header>
 
-    <section class="panels" aria-label="Academic profile sections">
+    <p v-if="loading" class="data-state" role="status">Loading sections…</p>
+    <p v-if="loadError" class="data-state data-state-error" role="alert">
+      The section data could not be loaded. Open this folder through a local web server.
+    </p>
+
+    <section v-if="!loading && !loadError" class="panels" aria-label="Academic profile sections">
       <article
         v-for="(section, index) in sections"
         :key="section.title"
@@ -58,71 +88,72 @@
           <span class="panel-number">0{{ index + 1 }}</span>
           <h2>{{ section.title }}</h2>
           <p class="panel-summary">{{ section.summary }}</p>
-
+            <div class="mr-0 mr-md-5 mb-3 img-wrap">
+              <img :src="'./img/' + section.img" alt="Image" class="img-fluid mb-0" style="max-width:90%; aspect-ratio: 1 / 1.2; object-fit: fill;">
+            </div>
           <div
             class="panel-details"
             :id="`panel-${index}`"
             :aria-hidden="active !== index"
           >
             <ul>
-              <li v-for="item in section.items" :key="item">{{ item }}</li>
+              <li v-for="item in section.items" :key="item"><a v-bind:href="item.link"> {{ item.paper }} </a></li>
             </ul>
           </div>
         </button>
       </article>
     </section>
 
-    <p class="hint">Select a section to expand it. Select it again to close.</p>
+    <p v-if="!loading && !loadError" class="hint">
+      Select a section to expand it. Select it again to close.
+    </p>
   </main>
 
-  <script src="https://unpkg.com/petite-vue@0.2.2/dist/petite-vue.iife.js" defer init></script>
-  <script>
-    function Profile() {
-      return {
-        active: null,
-        sections: [
-          {
-            title: 'Research',
-            summary: 'Current questions, methods, and collaborations.',
-            items: [
-              'Human-centered information systems',
-              'Digital knowledge and trust',
-              'Accessible research infrastructure'
-            ]
-          },
-          {
-            title: 'Publications',
-            summary: 'Selected articles, essays, and working papers.',
-            items: [
-              'Designing for Legibility — Journal of Digital Studies, 2026',
-              'Public Knowledge Infrastructures — New Media Review, 2025',
-              'Interfaces of Trust — working paper'
-            ]
-          },
-          {
-            title: 'Teaching',
-            summary: 'Courses, supervision, and learning resources.',
-            items: [
-              'Methods for Digital Research',
-              'Information, Evidence, and Society',
-              'Graduate thesis supervision'
-            ]
-          },
-          {
-            title: 'Service',
-            summary: 'Academic citizenship and public engagement.',
-            items: [
-              'Peer reviewer for interdisciplinary journals',
-              'Open-source research tools contributor',
-              'Community workshops on digital literacy'
-            ]
-          }
-        ],
-        toggle(index) {
-          this.active = this.active === index ? null : index;
-        }
-      };
-    }
+  <script type="module">
+    import { createApp } from "https://unpkg.com/petite-vue?module";
+
+    createApp({
+      active: null,
+      sections: [],
+      loading: true,
+      loadError: false,
+
+      toggle(index) {
+        this.active = this.active === index ? null : index;
+      },
+
+      loadSections() {
+        this.loading = true;
+        this.loadError = false;
+
+        fetch("./sections.json", { cache: "no-store" })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Could not load sections (HTTP ${response.status})`);
+            }
+
+            return response.json();
+          })
+          .then(data => {
+            if (!Array.isArray(data)) {
+              throw new TypeError("sections.json must contain an array.");
+            }
+
+            this.sections = data;
+          })
+          .catch(error => {
+            console.error("Unable to load sections.json:", error);
+            this.loadError = true;
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      },
+
+      mounted() {
+        this.loadSections();
+      }
+    }).mount("#profile-app");
   </script>
 </body>
 </html>
